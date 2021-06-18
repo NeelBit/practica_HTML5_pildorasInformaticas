@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Practica con JS 4</title>
+
+        <script>
+
+            function prueba(){
+
+                // EL TERCER PARAMETRO INDICA CUAL ELEMENTO TIENE PRIORIDAD PARA EJECUTARSE CON EVENTOS
+
+                var elementoP = document.querySelector("p");
+                elementoP.addEventListener("click", () => {alert("Presionaste sobre elemento p")}, false)
+
+                var elementoIMG = document.querySelector("img");
+                elementoIMG.addEventListener("click", () => {alert("presionaste una img")}, false)
+            }
+            
+
+            window.addEventListener("load", prueba);
+
+        </script>
+
+    </head>
+    <body>
+        
+        <h2>Practica de html5 con js 4</h2>
+        <h3> Este es el primer h3.</h3>
+        <h3> Segundo h3. abajo de esto hay un p con un img</h3>
+        <p><img src="img/probando_simpson.jpg" alt="probando anidados"></p>
+
+    </body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Practica de formularios1</title>
+
+        <style>
+
+            table{
+
+                text-align: center;
+                background-color: rgb(150, 235, 169);
+                margin: auto;
+                border: 2px black dashed;
+                border-radius: 10px;
+
+            }
+
+            #datos_usuario{
+
+                background-color: aqua;
+                width: 25%;
+                margin: 2px auto;
+
+            }
+
+            td{
+                padding: 5px;
+            }
+
+            #enviar{
+                width: 50%;
+                margin: 2px auto;
+                text-align: center;
+                display: block;
+            }
+
+        </style>
+
+        <script>
+
+            var edad;
+
+            // hacer que valide el formulario solo al cargar los datos y personalizar mensaje
+            function comenzar(){
+                /*
+                edad=document.getElementById="edad";
+
+                // ejecuta la accion cada ves que nosotros cambiemos ese elemento (edad)
+                edad.addEventListener("change", cambia_rango, false);
+                */
+
+                document.getElementById("edad").addEventListener("change", cambia_rango, false);
+
+                // poner al formulario a la escucha del evento invalid, y ejecutar la funcion validar. true para dar prioridad al formulario
+                document.datos_usuario.addEventListener("invalid", validar, true);
+
+                // identificar el elemento y poner a la escucha en 1 sola linea.
+                document.getElementById("enviar").addEventListener("click", enviar, false);
+
+                // hay que poner el formulario a la escucha del evento input para poder hacer las comprobaciones en tiempo real
+                document.datos_usuario.addEventListener("input", validar_tiempo_real, false);
+            }
+            
+            function cambia_rango(){
+
+                // identificamos elemento output (rango)
+                var salida = document.getElementById("rango");
+
+                // -18 porque a edad pusimos value que se situe ahi por defecto
+                var calculo = document.getElementById("edad").value-10;
+                
+                if (calculo<10){
+
+                    calculo = 0;
+                    document.getElementById("edad").value = 10;
+
+                }
+
+                // que output cambie su texto. en salida guardamos "rango"
+                salida.innerHTML=calculo + " a " + document.getElementById("edad").value;
+
+
+            }
+
+            // recibe parametro, evento error que devuelve el evento invalid
+            function validar(e){
+                
+                // target devuelve el objeto del formulario que ocasiono el error
+                var elemento = e.target;
+                elemento.style.background="red";
+            }
+
+            function enviar(){
+
+                var cuadro_usuario = document.getElementById("usuario")
+
+                // metodo checkValidity forma parte de la api form (datos_usuario es el nombre del formulario)
+                var correcto = document.datos_usuario.checkValidity(); // devuelve booleano
+
+                if (correcto) {
+
+                    document.datos_usuario.submit();
+
+                // mensaje personalizado valueMussing se fija si el campo es required y esta vacio
+                }else if(cuadro_usuario.validity.valueMissing == true){
+
+                    alert("El usuario no puede estar vacío");
+
+                // typeMismatch true cuando la sintaxis no coincide con el tipo del campo, ej mail
+                }else if(cuadro_usuario.validity.typeMismatch == true){
+
+                    alert("El nombre de usuario debe estar contenido por letras");
+
+                // patternMismatch
+                }else if(cuadro_usuario.validity.patternMismatch == true){
+
+                    alert("El nombre de usuario debe ser de 3 letras minúsculas y/o mayúsculas")
+
+                }
+
+            }
+            
+            // validityState para hacer validacion en tiempo real, el formulario a la escucha del evento input
+            function validar_tiempo_real(e){
+
+                var elemento = e.target;
+
+                if (elemento.validity.valid == true) {
+                    elemento.style.background="white";
+                }else{
+                    elemento.style.background="red";
+                }
+
+            }
+
+            window.addEventListener("load", comenzar, false);
+
+        </script>
+
+    </head>
+
+    <body>
+        
+        <section>
+
+            <form name="datos_usuario" id="datos_usuario" method="get">
+
+                <!-- tr: fila    td: celda  -->
+                <table>
+                    <tr>
+                        <td>Usuario: </td> <!-- a z minusculas y mayusculas obligatorio 3 caracteres minimo y max 10-->
+                        <td><input pattern="[A-Za-z]{3}" name="usuario" id="usuario" maxlength="10" required></td>
+                    </tr>
+
+                    <tr>
+                        <td>Email: </td>
+                        <td><input type="email" name="email" id="email" required></td>
+                    </tr>
+
+                    <tr>
+                        <td>Edad: </td>
+                        <td><input type="range" name="edad" id="edad" min="0" max="100" value="10" step="10"></td>
+                    </tr>
+
+                    <tr>
+                        <td> <output id="rango"> 0 a 10</output> </td>
+                    </tr>
+
+                </table>
+
+
+                <input id="enviar" type="submit" value="Enviar registro">
+
+            </form>
+
+        </section>
+
+    </body>
+
+</html>

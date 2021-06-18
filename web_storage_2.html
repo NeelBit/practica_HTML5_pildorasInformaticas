@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web storage</title>
+
+    <style>
+
+
+        h1{
+            text-align: center;
+        }
+
+        #zonaFormulario{
+            width: 80%;
+            border: 2px black solid;
+            margin: 1px auto;
+            border-radius: 10px;
+        }
+
+        #miFormulario{
+            width: 60%;
+            margin: 1px auto;
+            border: 2px black dashed;
+            border-radius: 10px;
+
+        }
+
+        #clave, #valor{
+            width: 90%;
+        }
+
+        #pGrabar{
+            width: 100px;
+            margin: 2px auto;
+        }
+
+        #grabar{
+            
+            border-bottom: 5px crimson ;
+            border-bottom-style: groove;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            
+        }
+
+        #zonaDatos{
+            border: 2px black solid;
+            width: 80%;
+            height: 300px;
+            margin: 1px auto;
+            border-radius: 10px;
+        }
+
+        #contenedorBorrarTodo{
+            width: 25%;
+            margin: 5px auto;
+        }
+        #borrarTodo{
+            width: 100%;
+        }
+
+        .items{
+            width: 50%;
+            margin: 2px auto;
+            text-align: center;
+            background-color: rgba(46, 46, 199, 0.7);
+            box-shadow: cornflowerblue 10px 5px 5px;
+            border-radius: 25px;
+        }
+
+    </style>
+
+    <script>
+
+        window.onload = function() {
+
+            var btnGrabar = document.getElementById("grabar");
+            var btnLimpiar = document.getElementById("borrarTodo");
+
+            var destino = document.getElementById("zonaDatos");
+
+            btnGrabar.addEventListener("click", itemNuevo, false);
+
+            btnLimpiar.addEventListener("click", function() {
+
+                if (confirm("Seguro que quieres borrar todo?")){
+
+                    //sessionStorage.clear();
+                    localStorage.clear();
+                    destino.innerHTML = "";
+
+                }
+
+
+            }, false);
+
+        }
+
+        function itemNuevo() {
+
+            // las claves deben ser diferentes
+            var clave = document.getElementById("clave").value;
+            var valor = document.getElementById("valor").value;
+        
+            //sessionStorage.setItem(clave, valor);
+            localStorage.setItem(clave, valor);
+
+
+            leer_mostrar(clave);
+
+            //sessionStorage.setItem[clave] = valor;  // si queremos almacenar de forma distinta
+
+            // vaciar elementos, dejar en blanco
+            document.getElementById("clave").value = "";
+            document.getElementById("valor").value = "";
+
+        }
+
+        function leer_mostrar(clave) {
+
+            var destino = document.getElementById("zonaDatos");
+
+            destino.innerHTML = "";
+
+            // destino.innerHTML = "Clave: " + clave + "<br>Valor: " + sessionStorage.getItem(clave) + "<br>";
+
+            
+            //for (var i=0; i<sessionStorage.length; i++){
+            for (var i=0; i<localStorage.length; i++){
+
+                //var clave = sessionStorage.key(i);
+                //var valor = sessionStorage.getItem(clave);
+                var clave = localStorage.key(i);
+                var valor = localStorage.getItem(clave);
+
+                /*
+
+                destino.innerHTML += "<div>Clave: " + clave + "<br>Valor: " + valor + "<br>";
+                destino.innerHTML += "<button id='"+"btn"+clave+ "'>Borrar item</button> </div>";
+
+                btn = document.getElementById("btn"+clave);
+                
+                
+                btn.addEventListener("click", function() {
+                    if (confirm("Estas seguro que quieres borrar: " + clave)){
+
+                        sessionStorage.removeItem(clave);
+
+                    }
+                    
+                }, false);
+            
+                */
+
+                //destino.innerHTML += "<div>Clave: " + clave + "<br>Valor: " + valor + "<br>";
+                //destino.innerHTML += "<button onclick='eliminarItem("+clave+")'>Borrar item</button> </div>";
+
+                destino.innerHTML += "<div class='items'>Clave: " + clave + "<br>Valor: " + valor + "<br><button onclick='eliminarItem("+clave+")'>Borrar item</button></div>";
+
+            }
+    
+
+        }
+
+        function eliminarItem(clave) {
+            if (confirm("Estas seguro que quieres borrar: " + clave)){
+
+                //sessionStorage.removeItem(clave);
+                localStorage.removeItem(clave);
+
+                // actualizar datos:
+                leer_mostrar(clave);
+            }
+        }
+
+
+
+    </script>
+
+</head>
+<body>
+    
+    <section>
+        <div id="contenedor">
+            
+            <h1>Web storage</h1>
+
+            <div id="zonaFormulario">
+
+                <form name="miFormulario" id="miFormulario">
+
+                    <p>Clave: <input type="text" name="clave" id="clave"></p>
+                    <p>Valor: <textarea name="valor" id="valor" cols="30" rows="10"></textarea></p>
+                    <p id="pGrabar"><input type="button" id="grabar" value="grabar"></p>
+
+                </form>
+
+            </div>
+
+        
+        </div>
+
+        <div id="contenedorBorrarTodo">
+            <button id="borrarTodo">Limpiar todo</button>
+        </div>
+        <div id="zonaDatos">
+
+            <p>A la espera de lectura</p>
+
+        </div>
+
+    </section>
+
+</body>
+</html>

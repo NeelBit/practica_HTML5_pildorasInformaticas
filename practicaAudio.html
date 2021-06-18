@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Practica audio</title>
+
+        <style>
+
+            section{
+                margin: 10px auto;
+                width: 400px;
+
+            }
+
+            nav{
+                margin: 5px 0;
+            }
+
+            #botones{
+                float: left;
+                width: 10px;
+                height: 20px;
+            }
+
+            #barra{
+                background-color: whitesmoke;
+                width: 320px;
+                height: 16px;
+                border: solid 1px;
+                border-radius: 10px;
+                /*padding: 2px;*/
+                margin-left: 60px;
+            }
+
+            #progreso{
+                position: absolute;
+                width: 0px;
+                height: 16px;
+                border: solid 1px;
+                border-radius: 8px;
+                background-color: rgba(255, 0, 0, 0.6);
+                /*padding: 1px;*/
+            }
+
+        </style>
+
+        <script>
+            var audio1, reproducir, barra, progreso, maximo;
+
+            maximo = 320;
+
+            function comenzar(){
+                audio1 = document.getElementById("audio1");
+                reproducir = document.getElementById("reproducir");
+                barra = document.getElementById("barra");
+                progreso = document.getElementById("progreso");
+
+                reproducir.addEventListener("click", clickando, false);
+                barra.addEventListener("click", adelantando, false);
+
+            }
+
+            function clickando(){
+                
+                if ((audio1.paused == false) && (audio1.ended == false)) {
+                    audio1.pause();
+                    reproducir.innerHTML="play";
+                }else{
+                    audio1.play();
+                    reproducir.innerHTML="pause";
+
+                    bucle = setInterval(estado, 1000);
+                    
+                }
+                
+            }
+
+            function estado(){
+                
+                if (audio1.ended == false){
+                    var total = parseInt(audio1.currentTime * maximo / audio1.duration);
+                    progreso.style.width = total+"px";
+                }else{
+                    progreso.style.width = "0px";
+                    reproducir.innerHTML="play";
+                }
+            }
+
+            function adelantando(eventPosicion){
+                
+                if(!audio1.paused && !audio1.ended){
+
+                    var ratonBarraX = eventPosicion.pageX-barra.offsetLeft;
+
+                    var nuevoTiempo = ratonBarraX * audio1.duration / maximo;
+
+                    audio1.currentTime = nuevoTiempo;
+
+                    progreso.style.width = ratonBarraX+"px";
+                }
+
+            }
+
+            window.addEventListener("load", comenzar, false);
+
+        </script>
+
+
+    </head>
+    <body>
+        
+        <h1>Practica con audio </h1>
+
+        <section id="reproductorAudio1">
+            <audio id="audio1" >
+
+                <source src="audios/audio1.mp3">
+                <source src="audios/audio1.ogg">
+
+            </audio>
+
+            <!-- creando barra de controles del video propia: -->
+            <nav>
+                <div id="botones">
+
+                    <button type="button" id="reproducir">play</button>
+
+                </div>
+                <div id="barra">
+                    <div id="progreso">
+
+                    </div>
+                </div>
+            </nav>
+
+        </section>
+
+    </body>
+
+</html> 

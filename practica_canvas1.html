@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba 1 canvas</title>
+
+    <style>
+
+        #dibujo, #dibujo2{
+            margin: 2px auto;
+            width: 50%;
+            position: relative;
+        }
+
+        #lienzo, #lienzo2{
+            border: 5px solid black;
+            width: 100%;
+
+        }
+
+    </style>
+
+    <script>
+        /*
+        function comenzar(){
+
+            var lienzo = document.getElementById("lienzo");
+            var ctx = lienzo.getContext("2d");
+            ctx.fillStyle = "green";
+            ctx.fillRect(10, 10, 100, 100);
+
+        }
+
+        window.addEventListener("load", comenzar(), false);
+
+        */
+
+        window.onload = function () {
+            // lienzo
+            var myCanvas = document.getElementById('lienzo');
+            var ctx = myCanvas.getContext('2d');
+            ctx.fillStyle = "red";
+
+            ctx.globalAlpha = 0.6;
+                        // x, y, XdimensionWidth, YdimensionHeight
+            ctx.fillRect(10, 10, 100, 100);
+
+            var vacio = myCanvas.getContext('2d');
+            vacio.strokeStyle = "blue";
+            vacio.strokeRect(150, 10, 100, 100);
+
+            var borrar = myCanvas.getContext('2d');
+            borrar.clearRect(35, 35, 50, 50);
+
+            ctx.clearRect(20, 20, 10, 10);
+
+            // lienzo2
+            var canvas2 = document.getElementById("lienzo2");
+            var degradado = canvas2.getContext('2d');
+                                                    // x0, y0, x1, y1
+            var gradado = degradado.createLinearGradient(0, 100, 100, 100); // de arriba a abajo
+            //var gradado = degradado.createLinearGradient(0, 0, 100, 100); // de iz superior a der inferior
+            // 0 a 1, es de donde comienza a donde termina un color, decimales
+            //gradado.addColorStop(0.5, "green"); // que el verde ocupe la mitad, y despues empiece el degradado
+            gradado.addColorStop(0, "green");
+            gradado.addColorStop(1, "red");
+
+            degradado.fillStyle = gradado;
+            // ocupa la totalidad de los parametros x0, y0, x1, y1 que pase arriba.
+            degradado.fillRect(0,0,100,100);
+
+            // circular:    (x0, y0, r0, x1, y1, r1)
+            var gradCircular = degradado.createRadialGradient(150, 100, 30, 150, 100, 70);
+
+            gradCircular.addColorStop(0, "green");
+            gradCircular.addColorStop(1, "red");
+
+            degradado.fillStyle = gradCircular;
+
+            degradado.fillRect(100, 50, 150, 150);
+
+        };
+
+    </script>
+
+</head>
+<body>
+    
+    <nav><h1>Hola, esta es una prueba de canvas</h1></nav>
+    <h2>Canvas fillRect</h2>
+
+    <section id="dibujo">
+
+        <canvas id="lienzo">
+
+            Su navegador no soporta canvas. 
+
+
+        </canvas>
+
+    </section>
+
+    <h2>Degradados</h2>
+
+    <section id="dibujo2">
+
+        <canvas id="lienzo2">
+
+            Su navegador no soporta canvas.
+
+        </canvas>
+
+    </section>
+
+</body>
+</html>

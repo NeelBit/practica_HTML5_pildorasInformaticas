@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Practica de formularios1</title>
+
+        <style>
+
+            table{
+
+                text-align: center;
+                background-color: rgb(150, 235, 169);
+                margin: auto;
+                border: 2px black dashed;
+                border-radius: 10px;
+
+            }
+
+            #registro{
+
+                width: 25%;
+                margin: 2px auto;
+
+            }
+
+            td{
+                padding: 5px;
+            }
+
+        </style>
+
+        <script>
+
+            // hacer que valide el formulario solo al cargar los datos y personalizar mensaje
+            function comenzar(){
+
+                var nombre = document.getElementById("nombre");
+                var apellido = document.getElementById("apellido");
+
+                // cuando existe una entrada(input) se va a llamar a la función validar
+                nombre.addEventListener("input", validar, false);
+                apellido.addEventListener("input", validar, false);
+
+                validar();
+
+            }
+
+            function validar(){
+
+                if((nombre.value == "") && (apellido.value == "")){
+                    
+                    // al cargar la pag va a leer esta instruccion. entonces hay que desactivarlo en el else
+                    // al darle al boton sin rellenar los campos escribe el mensaje personalizado
+                    nombre.setCustomValidity("Ingrese un nombre y apellido");
+                    
+                    nombre.style.background="red";
+                    apellido.style.background="red";
+
+                }else{
+                    nombre.setCustomValidity("");
+                    apellido.setCustomValidity("");
+                    nombre.style.background="white";
+                    apellido.style.background="white";
+                }
+
+            }
+
+
+            window.addEventListener("load", comenzar, false);
+
+        </script>
+
+    </head>
+
+    <body>
+        
+        <section>
+
+            <form name="registro" id="registro" method="get">
+
+                <datalist id="informacion">
+
+                    <option value="123456" label="etiqueta1"></option>
+                    <option value="654321" label="etiqueta2"></option>
+                    <option value="567890" label="etiqueta3"></option>
+
+                </datalist>
+
+                <!-- con list le indicamos que tiene que tomar la info de una lista (id="informacion") -->
+                telefono: <input type="tel" name="telefono" id="telefono" list="informacion">
+
+                <!-- tr: fila    td: celda  -->
+                <table>
+                    <tr>
+                        <td>Nombre: </td>
+                        <td><input type="text" name="nombre" id="nombre"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Apellido: </td>
+                        <td><input type="text" name="apellido" id="apellido"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Edad: </td>
+                        <td><input type="number" name="edad" id="edad" min="1" max="140"></td>
+                    </tr>
+
+                </table>
+
+
+                <input type="submit" value="Enviar registro">
+
+            </form>
+
+        </section>
+
+    </body>
+
+</html>

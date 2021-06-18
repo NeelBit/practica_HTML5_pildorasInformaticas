@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop</title>
+
+    <style>
+    
+    #contenedor_imagen{
+        width: 25%;
+        margin: 2px auto;
+    }
+
+    #miImagen{
+        width: 100%;
+        height: 100%;
+    }
+
+    section{
+        border: 1px black solid;
+    }
+    
+    table, tr, td{
+        border: 2px black solid;
+    }
+
+    td{
+        width: 500px;
+    }
+    
+    .imgArrastrada{
+        width: 200px;
+        height: 200px;
+        border-radius: 25px;
+        /* centrar */
+        display: block;
+        margin: 2px auto;
+    }
+
+    .imgArrastrada:hover{
+        transform: scale(1.2);
+
+    }
+
+    </style>
+
+    <script>
+        /*
+        window.onload = function (){
+            
+            var miImagen = document.getElementById("miImagen");
+
+            // dragend al terminar de arrastar dragover cuando esta arrastrando, drag mientra se arrastra similar al anterior
+            miImagen.addEventListener("dragstart", function () {
+                alert("comenzo el evento arrastrar");
+            }, false);
+            
+            
+        }
+        */
+
+        // declarar variables globales o sino no funcionará
+        var miImagen;
+        var destino;
+
+        function comenzar(){
+            miImagen = document.getElementById("miImagen");
+
+            miImagen.addEventListener("dragstart", comenzamos_arrastrar, false);
+
+
+            destino = document.getElementById("caja");
+
+            // cuando arrastramos y ponemos el puntero sobre el destino
+                                                // funcion anonima que llame a la funcion que resetea
+            destino.addEventListener("dragenter", function (e) {
+                e.preventDefault(); // que no haga nada por defecto
+
+                elemento = e.target;
+                
+                destino.style.backgroundColor = "rgba(50, 255, 50, 0.6)";
+
+            }, false);
+
+            destino.addEventListener("dragover", function (e) {
+                e.preventDefault();
+            }, false);
+
+            // cuando suelto
+            destino.addEventListener("drop", soltado, false);
+
+            // hacer que se oculte el elemento al soltarlo
+            miImagen.addEventListener("dragend", terminado, false);
+
+            // sin soltar, cuando ponemos el puntero sobre el elemento
+            destino.addEventListener("dragleave", function (e) {
+                e.preventDefault();
+
+                destino.style.background="white";
+                //destino.style.visibility="hidden"; // si queremos que se oculte la zona de destino si saca el puntero
+
+            } , false);
+
+        }
+
+        // recibe como parametro el objeto que ha desencadenado el evento
+        function comenzamos_arrastrar(e){
+
+            var codigo = "<img src='" + miImagen.getAttribute("src") + "' class='imgArrastrada'>";
+
+            e.dataTransfer.setData("Text", codigo);
+
+        }
+
+        function soltado(e){
+
+            e.preventDefault(); // que no haga nada por defecto cuando se suelte la imagen, porque varia dependiendo del navegador
+
+            destino.innerHTML = e.dataTransfer.getData("Text");
+
+
+        }
+
+        // e parametro es el objeto que desencadena el evento
+        function terminado(e){
+
+            var elemento = e.target;
+
+            elemento.style.visibility="hidden";
+
+        }
+
+
+        window.addEventListener("load", comenzar, false);
+
+    </script>
+
+</head>
+<body>
+    <section>
+    
+    <div id="contenedor_imagen">
+    
+        <img id="miImagen" src="img/probando_simpson.jpg" alt="probando simpson">
+    
+    </div>
+    
+    </section>
+
+    <section>
+
+        <h2>Segunda sección:</h2>
+
+        <table>
+
+            <tr>
+                <td>nombre: </td>
+                <td>imagen: </td>
+            </tr>
+            <tr>
+                <td>fulano</td>
+                <td id="caja"></td>
+            </tr>
+
+        </table>
+
+        <section id="cajon" style="width: 500px; height: 300px;">
+
+
+        </section>
+
+    </section>
+</body>
+</html>

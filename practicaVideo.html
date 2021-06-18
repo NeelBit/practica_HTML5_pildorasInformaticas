@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Practica de inserción de video </title>
+
+        <!-- <link rel="stylesheet" href="ubicaciónDeCCS"> -->
+
+        <style>
+            #video1{
+                width: 420px;
+                padding: 5px;
+                margin: 0 auto;
+                /*display: block;*/
+                background-color: rgb(124, 34, 34);
+                border: 5px solid ;
+                border-radius: 20px;
+            }
+
+            section{
+                /*background-color: black;*/
+            }
+
+            nav{
+                margin: 5px 0;
+            }
+
+            #botones{
+                float: left;
+                width: 10px;
+                height: 20px;
+            }
+
+            #barra{
+                background-color: whitesmoke;
+                width: 320px;
+                height: 16px;
+                border: solid 1px;
+                border-radius: 10px;
+                /*padding: 2px;*/
+                margin-left: 60px;
+            }
+
+            #progreso{
+                position: absolute;
+                width: 0px;
+                height: 16px;
+                border: solid 1px;
+                border-radius: 8px;
+                background-color: rgba(255, 0, 0, 0.6);
+                /*padding: 1px;*/
+            }
+
+        </style>
+
+        <script>
+            var miVideo1, reproducir, barra, progreso, maximo;
+
+            maximo = 320;
+
+            function comenzar(){
+                miVideo1 = document.getElementById("miVideo1");
+                reproducir = document.getElementById("reproducir");
+                barra = document.getElementById("barra");
+                progreso = document.getElementById("progreso");
+
+                reproducir.addEventListener("click", clickando, false);
+                barra.addEventListener("click", adelantando, false);
+
+            }
+
+            function clickando(){
+                /* si el video no esta pausado y no finalizado, al hacer click pause o muestre play en el btn */
+                if ((miVideo1.paused == false) && (miVideo1.ended == false)) {
+                    miVideo1.pause();
+                    reproducir.innerHTML="play";
+                }else{
+                    miVideo1.play();
+                    reproducir.innerHTML="pause";
+
+                    /* llamar a la función automaticamente cada mil milisegundos */
+                    bucle = setInterval(estado, 1000);
+                    
+                }
+                
+            }
+            /* estado de la barra de progreso */
+            function estado(){
+                
+                /* si el video no ha finalizado */
+                if (miVideo1.ended == false){
+                    var total = parseInt(miVideo1.currentTime * maximo / miVideo1.duration);
+                    progreso.style.width = total+"px";
+                }else{
+                    // codigo propio, para que cuando finalice vuelva a cero el progreso y cambie el estado del btn
+                    progreso.style.width = "0px";
+                    reproducir.innerHTML="play";
+                }
+            }
+
+            /* Cambiar duración del video pulsando en la barra: 
+            el argumento eventPosicion es el evento en si. */
+            function adelantando(eventPosicion){
+                
+                /* el objetivo es controlar que la acción se realice sólo cuando el video está siendo reproducido.
+                Si las propiedades paused y ended son falsas significa que el video está siendo reproducido 
+                y el código tiene que ser ejecutado.*/
+                if(!miVideo1.paused && !miVideo1.ended){
+                    // posición del raton en la barra
+                    var ratonBarraX = eventPosicion.pageX-barra.offsetLeft;
+                    
+                    // el segundo en concreto del video que corresponde al punto concreto de la barra
+                    var nuevoTiempo = ratonBarraX * miVideo1.duration / maximo;
+
+                    // llevar el video a esa tiempo:
+                    miVideo1.currentTime = nuevoTiempo;
+
+                    // llevar la barra de progreso:
+                    progreso.style.width = ratonBarraX+"px";
+                }
+
+            }
+
+            window.addEventListener("load", comenzar, false);
+
+        </script>
+
+    </head>
+    <body>
+        <h1> Video del borracho de la arbolada </h1>
+        <p>primer párrafo</p>
+
+        <section id="video1">
+            <!-- importante poner controls como primer argumento (establece los botones). Se suele crear los botones propios para que sean iguales en todos los navegadores -->
+            <!-- si se le especifica solamente e width ya se encarga de redimensionar el height -->
+            <!-- <video id="miVideo1" src="videos/borracho_de_la_arbolada_ogg.ogg" controls width="350" ></video> -->
+
+            <!-- Para incluir el mismo video en varios formatos: por si no soporta un navegador algun formato -->
+            <!-- postor="ubicacionDeLaImagenRepresentativaDelVideo"-->
+            <video id="miVideo1" width="420" poster="img/probando_simpson.jpg" >
+                <source src="videos/borracho_de_la_arbolada.mp4">
+                <source src="videos/borracho_de_la_arbolada_ogg.ogg" >
+
+            </video>
+            <!-- creando barra de controles del video propia: -->
+            <nav>
+                <div id="botones">
+
+                    <button type="button" id="reproducir">play</button>
+
+                </div>
+                <div id="barra">
+                    <div id="progreso">
+
+                    </div>
+                </div>
+            </nav>
+
+
+        </section>
+
+
+    </body>
+</html>

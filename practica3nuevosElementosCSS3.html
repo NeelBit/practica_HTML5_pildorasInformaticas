@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title> Probando nuevos elementos CSS3</title>
+        <style>
+
+            #principal {
+                width: 500px;
+
+                /* desde donde comenzar, color se puede poner %, color se puede poner %, */
+                /* webkit chrome */
+                background: -webkit-linear-gradient(left, orange 20%, yellow 30%, green 50%);
+                /* degradado para firefox */
+                background: -moz-linear-gradient(top, orange, yellow);
+                /* -ms-linear-gradient para IE */
+                /* -o-linear-gradient para Opera */
+
+
+
+                /*background-color: cornsilk;*/
+
+                text-align: center;
+
+                /* centrar la caja en el centro del monitor: 15px arriba y abajo, y auto izquierda y derecho*/
+                margin: 15px auto;
+
+                /* espacio entre el contenido(texto) y los bordes de la caja */
+                padding: 10px;
+
+                /* agregar borde a la caja */
+                border: 5px solid red;
+                /* redondear borde */
+                border-radius: 10px;
+                
+                /* sombra para la caja. desplazamiento X, desplazamiento Y, difuminación de la sombra, color*/
+                box-shadow: 10px 5px 15px black;
+
+                /* borde exterior con guiones */
+                outline: 2px dashed blue;
+                /* outline-offset es para alejar en px el borde */
+                
+                /* escalar. aplica en diferentes navegadores. 1 es el tamaño original.*/
+                /* transform: scale(0.5); /* disminuye a la mitad el tamaño. 1, -1 le da la vuelta (texto espejo)*/
+
+                /* rotar elemento */
+                /*transform: rotate(20deg); */
+
+                /* cambiar perspectiva */
+                transform: skew(10deg, 5deg);
+
+
+
+
+            }
+
+            /* hover indicar que características va a tener el ratón cuando se posiciones */
+            #principal:hover {
+                transform: rotate(180deg);
+                transition: 10s ease;
+
+            }
+
+            /* importar letra */
+            @font-face{
+                font-family: 'Showcard-Gothic-Normal';
+                src:url('SHOWG.TTF');
+            }
+
+            #titulo {
+                
+                /* degradado circular radial en chrome. center, circle/ellipse, color1, color2*/
+                background: -webkit-radial-gradient(red, blue);
+
+                /*background-color: greenyellow; */
+
+
+                /* intenta con verdana luego si no tiene instalado con sans-serif, después añadí mi propia fuente al principio*/
+                font: bold 36px Showcard-Gothic-Normal, Verdana, sans-serif;
+                /* sombra al texto */
+                text-shadow: 2px 3px 2px grey;
+            }
+
+            #subtitulo {
+                background-color: red;
+                /* red green blue alpha 0a1  */
+                color: rgba(0, 0, 0, 0.4);
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <header id="principal">
+            <!-- span no añade formato pero sirve para aplicar estilo al texto o agrupar elementos en línea-->
+            <h1><span id="titulo"> Estilos CSS3 </span> sigo con el texto</h1>
+
+            <p><h2 id="subtitulo">Subtitulo</h2></p>
+
+        </header>
+    </body>
+
+</html>

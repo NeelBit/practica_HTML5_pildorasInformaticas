@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web storage</title>
+
+    <style>
+
+
+        h1{
+            text-align: center;
+        }
+
+        #zonaFormulario{
+            width: 80%;
+            border: 2px black solid;
+            margin: 1px auto;
+            border-radius: 10px;
+        }
+
+        #miFormulario{
+            width: 60%;
+            margin: 1px auto;
+            border: 2px black dashed;
+            border-radius: 10px;
+
+        }
+
+        #clave, #valor{
+            width: 90%;
+        }
+
+        #pGrabar{
+            width: 100px;
+            margin: 2px auto;
+        }
+
+        #grabar{
+            
+            border-bottom: 5px crimson ;
+            border-bottom-style: groove;
+            border-bottom-right-radius: 10px;
+        }
+
+        #zonaDatos{
+            border: 2px black solid;
+            width: 80%;
+            height: 300px;
+            margin: 1px auto;
+            border-radius: 10px;
+        }
+
+    </style>
+
+    <script>
+
+        window.onload = function() {
+
+            //var miFormulario = document.getElementById("miFormulario");
+             
+            var destino = document.getElementById("zonaDatos");
+
+            var clave = document.getElementById("clave");   // .value si aca ya quiero que me almacene el valor
+            var valor = document.getElementById("valor");
+
+            var btnGrabar = document.getElementById("grabar");
+
+            
+
+            btnGrabar.addEventListener("click", function() {
+
+                // sessionStorage SE GUARDA EN LA SESION DE LA PESTAÑA
+
+                sessionStorage.setItem("clave", clave.value);
+                sessionStorage.setItem("valor", valor.value);
+
+                //sessionStorage.setItem[clave.value] = valor.value;  // si queremos almacenar de forma distinta
+
+                //alert(window.sessionStorage.getItem(clave) + " " + window.sessionStorage.getItem(valor));
+
+                destino.innerHTML = "Clave: " + window.sessionStorage.getItem("clave") + "<br>Valor: " + window.sessionStorage.getItem("valor");
+
+
+            }, false);
+
+        }
+
+
+    </script>
+
+</head>
+<body>
+    
+    <section>
+        <div id="contenedor">
+            
+            <h1>Web storage</h1>
+
+            <div id="zonaFormulario">
+
+                <form name="miFormulario" id="miFormulario">
+
+                    <p>Clave: <input type="text" name="clave" id="clave"></p>
+                    <p>Valor: <textarea name="valor" id="valor" cols="30" rows="10"></textarea></p>
+                    <p id="pGrabar"><input type="button" id="grabar" value="grabar"></p>
+
+                </form>
+
+            </div>
+
+        
+        </div>
+
+        <div id="zonaDatos">
+
+            <p>A la espera de lectura</p>
+
+        </div>
+
+    </section>
+
+</body>
+</html>

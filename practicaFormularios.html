@@ -1,0 +1,103 @@
+<!doctype html>
+
+<html>
+<head>
+    <title> Practica con formularios 1</title>
+
+    <style>
+    .form1{
+
+        width: 200px;
+        margin-left: 10px;
+
+    }
+
+    input{
+        width: 200px;
+    }
+
+    form{
+        width: 300px;
+        margin: 2px auto;
+    }
+
+    </style>
+
+</head>
+<body>
+    
+    <section>
+
+    <!-- autocomplete=off para que no autocomplete el form
+    required=true para que sea obligatorio
+    multiple para enviar varios datos separados por coma
+    autofocus=true donde va a estar en cursor al cargar la pag
+
+    -->
+    <form name="miFormulario" id="miFormulario" method="get">
+        <div class="form1">
+            Nombre: <input type="text" name="nombre" id="textF1" placeholder="ingrese nombre" required=true autofocus=true>
+        </div>
+
+        <div class="form1"> <!-- step="SaltarseDeEsteNumero" ejemplo de 5 en 5 - 10 - 15 etc -->
+            Edad: <input type="number" name="edad" id="edad" name="edad" min="0" max="140" placeholder="ingrese edad">
+        </div>
+
+        <div class="form1">
+            Fecha: <input type="datetime-local" name="fecha" id="fecha" placeholder="ingrese fecha de nacimiento">
+        </div>
+
+        <div class="form1">
+            Color: <input type="color" name="color" id="color">
+        </div>
+
+        <div class="form1">
+            Contraseña: <input type="password" name="contrasena" id="contrasena" placeholder="ingrese password" required=true>
+        </div>
+
+        <div class="form1">
+            Correo electrónico: <input type="email" name="email" id="email" placeholder="ingrese email">
+        </div>
+
+        <div class="form1">
+            Url: <input type="url" name="url" id="url" placeholder="ingrese direccion web">
+        </div>
+
+        <div class="form1">
+            Telefono: <input type="tel" name="tel" id="tel" placeholder="ingrese numero de telefono">
+        </div>
+
+        <div class="form1">
+            DNI: <input type="number" name="dni" id="dni" placeholder="ingrese dni">
+        </div>
+
+        <div class="form1">
+            numero de la suerte (-100 a 100): <input type="range" name="num" id="num" min="-100" max="100">
+        </div>
+
+        <div class="form1">
+            fecha prueba: <input type="date" name="fecha_prueba" id="fecha_prueba">
+        </div>
+
+        <div class="form1">
+            Código postal <input pattern="[0-9]{4}" name="cod_postal" id="cod_postal" placeholder="4 numeros del 0 al 9">
+        </div>
+
+        
+        <div class="form1">
+            <input type="submit" id="enviar" value="Enviar(esto es un submit)">
+        </div>
+
+    </form>
+
+    <img src="img/probando_simpson.jpg" alt="probando simpson">
+    <div class="form1">
+    <!-- con form="ID de formulario al que pertenece"-->
+    Que ves en la imagen? (esto se enviará junto al furmulario de arriba: <input type="text" name="que_ves" id="que_ves" form="miFormulario">
+
+    </div>
+
+    </section>
+
+</body>
+</html>

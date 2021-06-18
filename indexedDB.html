@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>indexedDB I</title>
+
+    <style>
+
+        h1{
+            text-align: center;
+        }
+
+        #contenedor{
+            background-color: darkgreen;
+            padding: 20px;
+        }
+
+        #cajaFormulario{
+            background-color: green;
+            width: 50%;
+            height: 250px;
+            border-radius: 25px;
+            margin: 10px auto;
+            font-size: large;
+            font-weight: bolder;
+            padding: 10px;
+
+            box-shadow: 10px 5px 5px greenyellow;
+        }
+
+        #zonaDatos{
+            clear: both;
+            background-color: greenyellow;
+            width: 50%;
+            border-radius: 25%;
+            margin: 2px auto;
+            height: 250px;
+            text-align: center;
+
+            box-shadow: 10px 5px 5px greenyellow;
+        }
+
+        p{
+            width: 80%;
+            margin: 10px auto;
+        }
+
+        input{
+            float: right;
+            width: 50%;
+        }
+
+        #grabar{
+            width: 50px;
+            margin: 10px auto;
+        }
+
+    </style>
+
+    <script>
+
+        // variable global
+        var bd;
+
+        window.onload = function() {
+
+            var clave = document.getElementById("clave");
+            var titulo = document.getElementById("titulo");
+            var anio = document.getElementById("anio");
+
+            btnGrabar = document.getElementById("grabar");
+
+            zonaDatos = document.getElementById("zonaDatos");
+
+
+            btnGrabar.addEventListener("click", agregarObjeto, false);
+
+            // crear base de datos:
+            var solicitud = indexedDB.open("miDB2");
+
+            //  si tuvo exito al crearse la db que haga lo siguiente. e es el objeto que desencadeno el evento, es decir, la base de datos.
+            solicitud.onsuccess = function(e) {
+
+                // almacenamos en esa variable la base de datos
+                bd = e.target.result;
+
+            };
+            
+            // onsuccess para indicar que va a hacer si tuvo exito al crearse un db, onupgradeneeded si ya esta creada y necesita actualizarse.
+
+            // crear almacen de objetos (similar a tablas): onupgradeneeded si necesita actualizar.
+            solicitud.onupgradeneeded = function(e) {   // que no me cree la tabla si ya esta creada despues de actualizar por ej
+                
+                // copiamos la otra instrucción por si lee este evento primero.
+                bd = e.target.result;
+                // crea el almacen. nombre y clave como argumentos
+                bd.createObjectStore("gente", {keyPath: "clave"});
+
+            };
+
+
+
+        };
+
+        function agregarObjeto() {
+            
+            // almaceno en variables los valores que hay en los 3 input
+            var clave = document.getElementById("clave").value;
+            var titulo = document.getElementById("titulo").value;
+            var anio = document.getElementById("anio").value;
+
+            // indicamos que vamos a hacer una transacción de lectura/escritura. primer parametro el nombre, segundo permisos
+            var transaccion = bd.transaction(["gente"], "readwrite");
+
+            // almaceno la transaccion
+            var almacen = transaccion.objectStore("gente");
+
+            // agregar elementos- que en clave almacene la clave, la tabla gente va a tener un campo clave donde va a estar la info del campo clave
+            var agregar = almacen.add({clave: clave, titulo: titulo, anio:anio});
+
+            // si tiene exito al agregar llamar a funcion mostrar:
+            agregar.addEventListener("success", mostrar, false);
+
+            // resetear los campos:
+            document.getElementById("clave").value = "";
+            document.getElementById("titulo").value = "";
+            document.getElementById("anio").value = "";
+        }
+
+        // MOSTRAR EN zonaDatos
+        function mostrar(){
+
+            // resetear contenido de zonaDatos
+            zonaDatos.innerHTML = "";
+
+            // creamos transaccion igual que anteriormente
+            var transaccion = bd.transaction(["gente"], "readonly");
+
+            var almacen = transaccion.objectStore("gente");
+
+            // crear cursor:
+            var cursor = almacen.openCursor();
+
+            // si tiene exito, que llame a otra funcion que va a mostrar la info:
+            cursor.addEventListener("success", mostrarDatos, false);
+
+
+        }
+
+        // recibe el objeto evento que ha desencadenado con el cursor
+        function mostrarDatos(e) {
+
+            // guarda el cursor
+            var cursor = e.target.result;
+
+            if (cursor) {
+
+                zonaDatos.innerHTML += "<div>" + cursor.value.clave + " -- " + cursor.value.titulo + " -- " + cursor.value.anio + "</div>";
+
+                // que avance el cursor
+                cursor.continue();
+            }
+
+        }
+
+    </script>
+
+</head>
+<body>
+    
+    <div id="contenedor">
+
+        <h1>indexedDB I</h1>
+
+    <section id="cajaFormulario">
+        
+        <form name="formulario" id="formulario">
+
+            <p>Clave: <input type="text" name="clave" id="clave"></p>
+            <p>Título: <input type="text" name="titulo" id="titulo"></p>
+            <p>Año: <input type="text" name="anio" id="anio"></p>
+            <p><input type="button" value="grabar" id="grabar" name="grabar"></p>
+
+
+        </form>
+
+    </section>
+
+    <section id="zonaDatos">
+        Futuros datos.
+    </section>
+    
+    </div>
+
+</body>
+</html>

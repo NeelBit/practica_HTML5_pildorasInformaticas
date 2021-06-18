@@ -1,0 +1,264 @@
+<!DOCTYPE html >
+
+<html>
+    <head>
+        <meta name="description" content="Un sencillo sitio web con algunas imágenes">
+        <meta name="keywords" content="imagenes, imágenes, aprendiendo html5, CCS3, imagenes de lo oculto" >
+
+        <title>Ejercicio guiado</title>
+
+        <style>
+
+            /* RESET CSS INICIO */
+                html, body, div, span, applet, object, iframe,
+                h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+                a, abbr, acronym, address, big, cite, code,
+                del, dfn, em, img, ins, kbd, q, s, samp,
+                small, strike, strong, sub, sup, tt, var,
+                b, u, i, center,
+                dl, dt, dd, ol, ul, li,
+                fieldset, form, label, legend,
+                table, caption, tbody, tfoot, thead, tr, th, td,
+                article, aside, canvas, details, embed, 
+                figure, figcaption, footer, header, hgroup, 
+                menu, nav, output, ruby, section, summary,
+                time, mark, audio, video {
+                    margin: 0;
+                    padding: 0;
+                    border: 0;
+                    font-size: 100%;
+                    font: inherit;
+                    vertical-align: baseline;
+                }
+                /* HTML5 display-role reset for older browsers */
+                article, aside, details, figcaption, figure, 
+                footer, header, hgroup, menu, nav, section {
+                    display: block;
+                }
+                body {
+                    line-height: 1;
+                }
+                ol, ul {
+                    list-style: none;
+                }
+                blockquote, q {
+                    quotes: none;
+                }
+                blockquote:before, blockquote:after,
+                q:before, q:after {
+                    content: '';
+                    content: none;
+                }
+                table {
+                    border-collapse: collapse;
+                    border-spacing: 0;
+                }
+            /* RESET CSS FIN */
+
+            /* comienzo */
+
+                body {
+                    /*font-size: 90%; /* se le puede decir que todo el sitio funcione con un porcentaje de tamaño de letra */
+                }
+
+                header{
+                    padding: 10px;
+                    margin: 10px auto;
+                }
+
+                #principal{
+
+
+
+                    text-align: center;
+                    background-color: blue;
+                    background: radial-gradient(white, blue);
+                    border: 10px white;
+                    border-radius: 10px;
+                    box-shadow: black 5px 5px 10px;
+                    /*text-shadow: 3px 2px 1px aqua;*/
+                    /*text-shadow: 2px 2px 2px rgba(30, 69, 199, 0.8);*/
+                    text-shadow: 2px 2px 4px gray;
+                    font-size: 24px;
+                    width: 75%;
+
+                    /*font: normal 2.4em sans-serif; /* esto em 1 representa el tamaño tal cual, 2 el doble y asi. en normal va negrita y eso.  */
+                
+
+                }
+
+                #titulo{
+                    background: linear-gradient( blue, white);
+                    border: 3px solid black;
+                    border-radius: 10px;
+                    padding: 10px;
+                    margin: 10px auto;
+                    font-size: 35px;
+                    color: red;
+
+                }
+
+                h2{
+                    color: whitesmoke;
+                    text-align: left;
+                    font-size: 26px;
+                    padding: 10px;
+                    text-shadow: 2px 2px 3px white;
+                }
+
+                figure img{
+                    /*display: flex;*/
+                    width: 300px;
+                    height: 300px;
+                    border: 5px gainsboro groove;
+                    border-radius: 25px;
+                    /* horizontal, vertical, difuminado */
+                    box-shadow: 0px 2px 3px gainsboro;
+
+                    transition: ease-in-out 1.1s;
+
+                }
+
+                /*
+                figure{
+                    clear: both;
+                    margin: 10px auto;
+
+                    padding: 10px;
+
+                }*/
+                figure{
+                    float: left; /* float es para rodear el contenido */
+                    margin: 10px;
+                }
+
+                figcaption{
+                    clear: both;
+                    padding: 5px;
+                    text-align: center;
+                }
+
+                section{
+
+
+                    display: inline-flex;
+                    flex-wrap: wrap;
+
+                    clear: both;
+                    margin: 5px auto;
+
+                    padding: 10px;
+
+
+                    border-top: 10px ridge red;
+                    border-bottom: 10px ridge red;
+                    
+
+                }
+
+                figure img:hover {
+                    
+                    transform: scale(1.05);
+                    
+
+                }
+
+                footer{
+                    clear: both;
+                    margin: 10px;
+                }
+
+
+             /* fin de mi css */
+
+        </style>
+
+    </head>
+
+    <body>
+        <header id="principal">
+
+            <hgroup>
+                <h1><span id="titulo">Práctica guiada</span></h1>
+                <h2>Galería de imágenes</h2>
+            </hgroup>
+
+        </header>
+
+        <section>
+            
+            <!-- <article> -->
+                <figure>
+                    <img src="img/1.jpg" alt="primera imagen">
+
+                    <figcaption>
+                        pie de imagen1
+                    </figcaption>
+                </figure>
+
+            <!-- </article> -->
+
+            <!-- <article> -->
+                <figure>
+                    <img src="img/2.jpg" alt="segunda imagen">
+
+                    <figcaption>
+                        pie de imagen2
+                    </figcaption>
+
+                </figure>
+            <!-- </article> -->
+
+            <!-- <article> -->
+                <figure>
+                    <img src="img/3.jpg" alt="tercer imagen">
+                    <figcaption>
+                        pie de img 3
+                    </figcaption>
+                </figure>
+            <!-- </article> -->
+
+            <!-- <article> -->
+                <figure>
+                    <img src="img/4.jpg" alt="cuarta imagen">
+                    <figcaption>
+                        pie de img 4
+                    </figcaption>
+                </figure>
+            <!-- </article> -->
+
+            <!-- <article> -->
+                <figure>
+                    <img src="img/5.jpg" alt="quinta imagen">
+                    <figcaption>
+                        pie de img 5
+                    </figcaption>
+                </figure>
+            <!-- </article> -->
+
+            <!-- <article> -->
+                <figure>
+                    <img src="img/6.jpg" alt="sexta imagen">
+                    <figcaption>
+                        pie de img 6
+                    </figcaption>
+                </figure>
+            <!-- </article> -->
+
+            <!-- <article> -->
+                <figure>
+                    <img src="img/7.jpg" alt="séptima imagen">
+                    <figcaption>
+                        pie de img 7
+                    </figcaption>
+                </figure>
+            <!-- </article> -->
+
+        </section>
+
+        <footer>
+            <p> <small> copyleft - Esto es el pie de página </small></p>
+        </footer>
+    </body>
+
+</html>

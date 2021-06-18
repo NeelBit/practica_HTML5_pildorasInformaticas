@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica drag & drop galería de imágenes</title>
+
+    <style>
+
+        figure{
+            float: left;
+        }
+
+        img{
+            width: 250px;
+            height: 300px;
+            box-shadow: rgba(255, 100, 25, 0.6) 5px 5px 10px;
+        }
+
+        #zonaDestino{
+            clear: both;
+            width: 500px;
+            height: 500px;
+            margin: 1px auto;
+        }
+        #zonaDestino img{
+            display: inline-block;
+            margin: 1px auto;
+        }
+
+        section{
+            border: 1px black solid;
+        }
+
+
+    </style>
+
+    <script>
+
+        window.onload = function() {
+
+
+                                    // selector descendente, selecciona las images que esten dentro de #cajaImagenes
+            var imagenes = document.querySelectorAll("#cajaImagenes img");
+
+            zonaDestino = document.getElementById("zonaDestino");
+            
+            // prueba
+            var idImg;
+            
+            
+            for (var i=0; i<imagenes.length; i++){
+
+                // que no aplique para img1 (posicion 0)
+                //if (i != 0){
+
+                
+
+                    // dragstart al comenzar a arrastrar
+                    imagenes[i].addEventListener("dragstart", function(e) {
+
+                        //e.preventDefault();
+
+                        var elemento = e.target;
+        
+                        var codigo = "<img src='" + elemento.getAttribute("src") + "'>";
+
+
+                        idImg = elemento.getAttribute("id");
+
+                        e.dataTransfer.setData("Text", codigo);
+
+                        
+
+                    }, false);
+
+                    // hacer que la imagen se oculte al finalizar arrastre: 
+                    imagenes[i].addEventListener("dragend", function(e) {
+
+                        var elemento = e.target;
+                        if (idImg != "img1"){
+                            elemento.style.visibility="hidden";
+                        }
+                        
+
+                    }, false);
+
+                //}
+                    
+                
+
+            }
+
+            // cuando ingrese en zona de destino
+            zonaDestino.addEventListener("dragenter", function(e) {
+                e.preventDefault();
+
+                //zonaDestino.style.backgroundColor = "red";
+
+            }, false);
+
+            // cuando sale de zona de destino
+            zonaDestino.addEventListener("dragleave", function (e) {
+                e.preventDefault();
+
+                zonaDestino.style.background="white";
+                
+
+            } , false);
+            
+            // cuando se arrastra por zona de destino válido
+            zonaDestino.addEventListener("dragover", function (e) {
+                e.preventDefault();
+
+                var elemento = e.target;
+
+                if (idImg == "img1"){
+
+                    zonaDestino.style.backgroundColor = "red";
+
+                }else{
+                    zonaDestino.style.backgroundColor = "blue";
+                }
+
+
+
+            }, false);
+
+            // drop al soltar
+            zonaDestino.addEventListener("drop", function(e) {
+
+                e.preventDefault(); // que no haga nada por defecto cuando se suelte la imagen.
+
+                var elemento = e.target;
+
+                if (idImg !== "img1"){
+                    zonaDestino.innerHTML = e.dataTransfer.getData("Text");
+                }else{
+                    zonaDestino.innerHTML = "Imagen (img1) no se puede arrastrar";
+                }
+
+
+
+                alert(idImg);
+                
+                // otra forma: si pasabamos por dataTransfer el id
+                //var src = document.getElementById(id).src;
+
+            }, false);
+
+        };
+
+    </script>
+
+</head>
+<body>
+    
+
+    <header id="principal">
+
+        <hgroup>
+            <h1><span id="titulo">Drag & drop</span></h1>
+            <h2>Galería de imágenes</h2>
+        </hgroup>
+
+    </header>
+
+    <section id="cajaImagenes">
+            
+        <figure >
+            <img src="ejercicioGuiado/img/1.jpg" alt="primera imagen" id="img1">
+
+            <figcaption>
+                pie de imagen1 - (imágen no arrastrable)
+            </figcaption>
+        </figure>
+
+        <figure >
+            <img src="ejercicioGuiado/img/2.jpg" alt="segunda imagen" id="img2">
+
+            <figcaption>
+                pie de imagen2
+            </figcaption>
+        </figure>
+
+        <figure >
+            <img src="ejercicioGuiado/img/3.jpg" alt="tercera imagen" id="img3">
+
+            <figcaption>
+                pie de imagen3
+            </figcaption>
+        </figure>
+
+        <figure >
+            <img src="ejercicioGuiado/img/4.jpg" alt="cuarta imagen" id="img4">
+
+            <figcaption>
+                pie de imagen4
+            </figcaption>
+        </figure>
+
+    </section>
+
+    <section id="zonaDestino">
+
+        <h2>Arrastre las imágenes aquí</h2>
+
+    </section>
+
+</body>
+</html>

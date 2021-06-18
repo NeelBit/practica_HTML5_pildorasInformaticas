@@ -1,0 +1,30 @@
+CACHE MANIFEST
+
+archivo_que_quieres_que_descargue_y_almacene_en_el_navegador.html
+archivo_que_quieres_que_descargue_y_almacene_en_el_navegador.css
+archivo_que_quieres_que_descargue_y_almacene_en_el_navegador.js
+
+NETWORK
+
+archivos_solo_disponible_bajo_conexion.html
+archivos_solo_disponible_bajo_conexion.css
+
+FALLBACK
+
+archivos_diponibles_cuando_haya_conexion,si_no_estan_disponibles_agarra_la_de_cache.html
+
+
+/*
+en el archivo html que va a linkar a este archivo
+
+<html manifest="miArchivoManifest.manifest">
+	...
+<!html>
+
+en el js
+
+var cache = window.applicationCache;
+
+poner a la escucha del evento error por ejemplo.
+
+*/

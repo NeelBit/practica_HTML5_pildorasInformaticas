@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directories & System</title>
+
+    <style>
+
+        section{
+            width: 40%;
+            border: 2px black solid;
+            border-radius: 10px;
+            float: left;
+            padding: 5px;
+            margin: 5px 5px;
+        }
+
+        #entrada{
+            width: 90%;
+
+        }
+
+        #boton{
+            width: 50%;
+            display: block;
+            margin: 5px auto;
+        }
+
+
+
+    </style>
+
+    <script>
+
+        window.onload = function() {
+
+            // con var las variables locales
+
+            var btnAceptar = document.getElementById("boton");
+            zonaDatos = document.getElementById("zonaDatos");
+
+            btnAceptar.addEventListener("click", crear, false);
+
+            // pedir permiso al navegador: reservar memeoria, como argumento cuanto espacio(en bytes) 5Mb=(5*1024K que hay en un MB * 1024B que hay en una K)  debe asignar, y en caso de que tengo exito a que funcion queremos llamar
+            navigator.persistentStorage.requestQuota(5*1024*1024, acceso);
+
+
+            /*
+            if(navigator.storage && navigator.storage.persist){
+                alert("permiso accedido");
+            }
+            */
+
+        }
+
+        // creacion del sistema de archivos
+        function acceso() {
+
+            // ESTA FUNCIÓN ESTA OBSOLETA
+                    // tipo de espacio (persistent), espacio
+            window.requestFileSystem(PERSISTENT, 5*1024*1024, crearSistema, falloCrearSistema);
+
+
+
+        }
+
+        // con el request de arriba se lanza el objeto FileSystem, ese es el que recibe por parametro
+        function crearSistema(sistema) {
+
+            var espacio = sistema.root; // espacio va a ser la raiz de nuestro sistema de archivos
+
+        }
+
+        function falloCrearSistema(e) {
+
+            alert("Error al crear sistema " + e.code);
+
+        }
+
+        // funcion de btnAceptar
+        function crear() {
+            
+            var nombreArchivo = document.getElementById("entrada").value;
+
+            // si no esta vacio que cree el archivo
+            if (nombreArchivo != "") {
+                                // crear un archivo con ese nombre si es la primera ves que lo crea. exclusive true devolveria error si ya esta creado el archivo
+                espacio.getFile(nombreArchivo, {create: true, exclusive: false}, mostrarArchivo, falloCreacionArchivo);
+            
+            }
+
+        }
+
+        function mostrarArchivo(entrada) {
+
+            document.getElementById("entrada").value = "";
+
+            zonaDatos.innerHTML = "éxito en la creación de espacio y del archivo";
+
+            zonaDatos.innerHTML += "<br>Nombre: "+entrada.name+"<br>Ruta del archivo: "+entrada.fullPath;
+
+        }
+
+
+        function falloCreacionArchivo(e) {
+            alert("Error al crear el archivo "+ e.code );
+        }
+
+
+
+    </script>
+
+</head>
+<body>
+    <div id="contenedor">
+
+    
+        <section id="zonaFormulario">
+
+            <form id="miFormulario" name="miFormulario">
+
+                <p>Nombre: <br><input type="text" name="entrada" id="entrada" required></p>
+                <p><input type="button" value="Aceptar" id="boton" name="boton"></p>
+
+
+            </form>
+
+        </section>
+
+        <section id="zonaDatos">
+
+            No hay información.
+
+        </section>
+
+    </div>
+
+</body>
+</html>

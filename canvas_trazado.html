@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trazado</title>
+
+        <style>
+
+            #dibujo{
+                margin: 2px auto;
+                width: 500px;
+                height: 500px;
+                position: relative;
+            }
+
+            #lienzo{
+                border: 5px solid black;
+
+            }
+
+    </style>
+
+    <script>
+
+        window.onload = function () {
+
+            var elemento = document.getElementById("lienzo");
+            var lienzo = elemento.getContext('2d');
+
+            // haciendo un triangulo
+            lienzo.beginPath();
+            
+            lienzo.moveTo(10, 200);
+
+            lienzo.lineTo(100, 10);
+
+            lienzo.lineTo(200, 200);
+
+            lienzo.lineTo(10, 200);
+
+            //lienzo.clip(); // para usar mascara, que se dibuje solo en esa area. despues de esto va otro beginPath para dibujar en la mascara
+            lienzo.closePath();
+
+            // figura vacia
+            //lienzo.stroke();
+
+            // figura llena
+            lienzo.fill();
+
+        };
+
+
+    </script>
+
+</head>
+<body>
+    
+    <section id="dibujo">
+    
+        <canvas id="lienzo" width="500px" height="500px">
+
+
+        
+        </canvas>
+
+    
+    </section>
+
+</body>
+</html>

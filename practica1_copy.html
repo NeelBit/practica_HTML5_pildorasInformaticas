@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+        <!-- En el head se suele incluir HOJAS DE ESTILO, ARCHIVOS JS (INTERNOS O EXTERNOS),
+        ICONOS, TITULO, y META ETIQUETAS -->
+
+        <title>Hola mundo</title>
+
+        <meta charset="iso-8559-1"/>
+        <meta name="description" content="Página de prueba 1 de HTML5"/>
+        <meta name="keywords" content="HTML5, css3, js, javascript, aprendiendo"/>
+
+        <!-- La etiqueta link sirve para enlazar o incluir documentos adicionales. rel informa que tipo de archivo estamos agregando -->
+        <link rel="stylesheet" href="miHojaDeEstilos.css"/>
+
+        <!-- modificar estilo -->
+        <style>
+            aside {
+                background-color: red;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <!-- cabecera -->
+        <header id="principal">
+            <h1> Hola mundo! (esta es la cabecera) </h1>
+        </header>
+
+
+        <!-- barra de navegación-->
+        <nav>
+            <ul>
+                <li>menú1 - quienes somos</li>
+                <li style="background-color:coral;">menú2 - productos</li>
+                <li>menú3 - precios</li>
+                <li>Estos menús son de nav</li>
+            </ul>
+        </nav>
+
+
+        <!-- esta es la barra lateral -->
+        <aside>
+            <blockquote>
+                <p>Esto es una cita de un texto que debería ir en la barra lateral</p>
+            </blockquote>
+
+            <blockquote>
+                <p> Esta es la segunda cita, en la barra lateral</p>
+            </blockquote>
+
+            <blockquote>
+                <p>
+                    <strong> Este es el tercer párrafo de la barra lateral. </strong>
+                    <cite>Fuente del tercer párrafo</cite>
+                </p>
+            </blockquote>
+        </aside>
+
+
+        <!-- esto es la sección principal-->
+        <section>
+
+            <!-- etiqueta article para agrupar contenidos-->
+            <article>
+                <header class="cabeceraArticle">
+                    <!-- cuando tenemos varias h, hay que agruparlas en html5-->
+                    <hgroup>
+                        <h2> Esto es un párrafo - titulo h2</h2>
+                        <h3> Esto es un subtitulo H3 </h3>
+                    </hgroup>
+                </header>
+                
+                <!-- insertar imágenes. title añade descripción emergente -->
+                <figure>
+                    <img src="img/probando_simpson.jpg" title="Homero Simpson" />
+                    <!-- añade pie de imagen-->
+                    <figcaption>
+                        Esto es una imagen de homero tocando la guitarra
+                    </figcaption>
+                     
+                </figure>
+                
+                <figure>
+                    <a href="https://www.google.com"> <img src="img/probando_simpson.jpg" title="Ir a google"/></a>
+                    <figcaption>
+                        Homero tocando la guitarra, redirecciona a google
+                    </figcaption>
+                </figure>
+
+                <p> Esto es otro párrafo dentro de la etiqueta section, a su ves dentro de article. Es decir, el contenido principal.</p>
+                <p> Aquí continua otro párrafo del contenido principal.</p>
+                <p> Aquí otro texto de ejemplo, lo siguiente va a tener mark, se usa para remarcar un texto sin relevancia, por ej: cuando se hace una búsqueda <mark> esto debería estar resaltado!</mark></p>
+                <p> Este texto tendrá etiqueta em, <em> aca va el texto con énfasis - cursiva</em></p>
+                <p> Etiqueta strong se usa para resaltar un texto (negrita) - <strong> texto importante con strong</strong></p>
+                <p> Etiqueta small se usa para textos legales, copyright, todos los derechos reservados, etc. - <small> texto con small </small> </p>
+                <p> Etiqueta cite (cursiva) se usa para títulos de libros, canciones, películas, trabajos propios. <cite> texto con cite</cite></p>
+                <p> <time datetime="2021-02-08" pubdate="pubdate" > Esta seria una etiqueta time , fecha de publicación: 8/2/21 </time></p>
+
+                <footer>
+                    <p>Comentarios de usuarios, desde footer dentro de article en section</p>
+
+                    <!-- address genera un blocklevel (salto de linea arriba y abajo)-->
+                    <p> Esto es un <address> address para representar información de contacto (mail, teléfono, etc), debe ir en el footer</address></p>
+                </footer>
+            </article>
+
+            <article>
+                <header class="cabeceraArticle">
+
+                    <hgroup> 
+                        <h2> Noticia 1 </h2>
+                        <h3> Subtitulo de la noticia 1</h3>
+                    </hgroup>
+
+                </header>
+
+                <p> sigue noticia 1</p>
+                <p> termina noticia 1</p>
+
+                <footer>
+                    <p>Comentarios de usuarios, desde footer dentro de article en section</p>
+                </footer>
+            </article>
+
+            <article>
+                <header class="cabeceraArticle">
+
+                    <hgroup>
+                        <h2> Noticia 2</h2>
+                        <h3> Subtitulo de la noticia 2</h3>
+                    </hgroup>
+
+                </header>
+
+                <p> sigue noticia 2</p>
+                <p> termina noticia 2</p>
+
+                <footer>
+                    <p>Comentarios de usuarios, desde footer dentro de article en section</p>
+                </footer>
+            </article>
+
+            <article>
+                <p> Terminamos la sección section.</p>
+            </article>
+
+        </section>
+
+
+        <!-- píe de página -->
+        <footer id="piePagPrincipal">Esto es el píe de página. <small>derechos reservados.</small></footer>
+
+        <!-- Script van aca: -->
+        <script>
+            //<!-- alert("Hola");  -->
+        </script>
+
+    </body>
+
+</html>

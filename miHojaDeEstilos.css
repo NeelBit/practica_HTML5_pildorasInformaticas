@@ -1,0 +1,49 @@
+/* selector de etiqueta (tag). ej: body   .  adentro de las llaves, propiedad : valor */
+body {
+    background-color: greenyellow;
+}
+
+/* selector de id. ej: #principal */
+#principal {
+    background-color: brown;
+    text-align: center;
+}
+
+/* selector de class. ej: cabeceraArticle*/ 
+.cabeceraArticle {
+    background-color: white;
+    text-align: center;
+}
+
+section {
+    background-color: bisque;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+nav {
+    background-color: blue;
+    padding: 10px;
+}
+
+aside {
+    background-color: blueviolet;
+    float: right;
+    height: 1600px;
+    margin-left: 20px;
+}
+
+#piePagPrincipal {
+    background-color: deepskyblue;
+    margin: 50px; /* establecer distancias entre cajas */
+    clear: both; /* corta con el float, para que no se meta en su espacio */
+    padding: 10px;
+}
+
+li {
+    float: inline-start;
+    display: inline;
+    /*padding: 20px;*/
+    
+    background-color: yellow;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>api Communication</title>
+
+    <script src="communication_1.js"></script>
+
+    <style>
+
+        #zonaFormulario, #zonaDatos{
+            width: 45%;
+            height: 400px;
+            border: black 2px solid;
+            float: left;
+            margin: 10px 10px;
+            text-align: center;
+            padding: 10px;
+        }
+
+
+
+        #btnEnviar{
+            /*width: 80%;*/
+            margin: 10px auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+
+
+    </style>
+
+	<link rel="stylesheet" type="text/css" href="css/materialize-icons.css">
+	<link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+	<script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<meta name="viewport"  content="width=device-width,initial-scale=1.0"/>
+
+</head>
+
+<body class="teal">
+
+    <div class="container white">
+
+        <div id="zonaFormulario" class="white hoverable">
+            <form id="formulario">  
+            
+                <input type="button" value="Enviar petición (leer)" id="btnEnviar" class="btn">
+            
+            </form>
+
+            <div id="barraProgreso" class="progress">
+                <div id="progress" class="determinate" style="width: 0%;">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="zonaDatos" class="white hoverable">
+
+            zonaDatos
+
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>Practica numero 2</title>
+
+        <style>
+            p[name="misElementos"] {
+                color: red;
+            }
+            /* ^= sirve para indicar name que empiecen con "otroE" */
+            /* $= los que terminen con lo indicado */
+            /* *= todos los que tengan en algún punto los caracteres indicados */
+            p[name^="otrosE"] {
+                color:blue
+            }
+
+            /* pseudoclases - aplicar al segundo elemento h3*/
+            h3:nth-child(2) {
+                color: red;
+            }
+
+            li:nth-child(2) {
+                background-color: yellow;
+            }
+
+            /* la palabra odd en ves del numero aplica a los impares. even a pares */ 
+
+            p:nth-child(2) {
+                text-align: center;
+            }
+
+            /* último elemento li subrayado*/
+            li:last-child {
+                text-decoration: underline;
+            }
+
+            /* only-chilg a las etiquetas que sean hijas únicas */
+            
+
+        </style>
+
+    </head>
+
+    <body>
+        <p name="misElementos"> Hola, este es el primer párrafo </p>
+        <p name="misElementos"> Este es el segundo párrafo! (segundo p center)</p>
+        <p name="otrosElementosVarios"> Fin de sitio. </p>
+        
+        <hgroup> 
+            <h3> Hola soy un h3</h3>
+            <h3> Hola2 soy un h3</h3>
+            <h3> Hola3 soy un h3</h3>
+        </hgroup>
+
+        <ul>
+            <li><p> Frutas</p></li>
+            <li><p> verduras</p> <p> Verduras segundo P (center)</p></li>
+            <li><p> Lácteos</p></li>
+        </ul>
+
+        <p> hasta pronto! ultimo elemento p </p>
+
+    </body>
+
+</html>

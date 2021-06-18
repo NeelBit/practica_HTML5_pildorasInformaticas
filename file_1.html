@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API File</title>
+
+    <style>
+
+        section{
+            width: 40%;
+            border: 2px black solid;
+            border-radius: 10px;
+            float: left;
+            padding: 5px;
+            margin: 5px 5px;
+        }
+
+    </style>
+
+    <script>
+
+        window.onload = function() {
+
+            var archivos = document.getElementById("archivos");
+            zonaDatos = document.getElementById("zonaDatos");
+
+
+            // evento que se dispara despues de elegir archivo
+            archivos.addEventListener("change", procesar, false);
+
+
+
+        }
+
+        // e hace referencia al objeto boton tipo file, nos permite acceder a sus propiedades y metodos.
+        function procesar(e) {
+            
+            // files es una propiedad de file que es un array que contiene los elementos seleccionados por el boton
+            var archivos = e.target.files;
+
+            var miArchivoUno = archivos[0];
+
+            // crear lector:
+            var lector = new FileReader();
+
+                                        // admite 2 parametro para codificacion, ej: "iso-8859-1"
+            //lector.readAsText(miArchivoUno);
+            lector.readAsText(miArchivoUno, "iso-8859-1");
+
+            // poner al lector a la escucha, evento load
+            lector.addEventListener("load", mostrarEnWeb, false);
+
+        }
+
+        // recibe el objeto desencadenante del evento, osea el lector
+        function mostrarEnWeb(e) {
+
+            var resultado = e.target.result;
+            zonaDatos.innerHTML = resultado;
+
+        }
+
+
+
+    </script>
+
+</head>
+<body>
+    <div id="contenedor">
+
+    
+        <section id="zonaFormulario">
+
+            <form id="miFormulario" name="miFormulario">
+
+                <p>Archivos: <br><input type="file" name="archivos" id="archivos"></p>
+
+            </form>
+
+        </section>
+
+        <section id="zonaDatos">
+
+            No hay información.
+
+        </section>
+
+    </div>
+
+</body>
+</html>

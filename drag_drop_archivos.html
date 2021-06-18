@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and drop archivos</title>
+
+    <style>
+
+        #zonaDestino{
+
+            text-align: center;
+            width: 50%;
+            height: 250px;
+            border: 2px black solid;
+            border-radius: 25px;
+            margin: 1px auto;
+        }
+
+    </style>
+
+    <script>
+
+        window.onload = function () {
+            
+            zonaDestino = document.getElementById("zonaDestino");
+
+
+            zonaDestino.addEventListener("dragenter", function(e){
+
+                e.preventDefault();
+
+            }, false);
+
+
+            zonaDestino.addEventListener("dragover", function(e) {
+
+                e.preventDefault();
+
+            }, false);
+
+
+            zonaDestino.addEventListener("drop", soltado, false);
+
+
+
+        }
+
+        function soltado(e) {
+
+            e.preventDefault();
+
+            var info = e.dataTransfer.files;
+
+            var listado = "";
+
+            for (var i=0; i<info.length; i++){
+
+                listado += "Nombre: "
+                listado += info[i].name;
+                listado += "<br>Tamaño: ";
+                listado += info[i].size;
+                listado += " bytes y en KB es /1024 : " + (info[i].size/1024).toFixed(2);   // toFixed para cortar los decimales
+                listado += "<br>Tipo: ";
+                listado += info[i].type;
+                listado += "<br>";
+                listado += "Ultima fecha de modif.: " + info[i].lastModifiedDate + "<br>"; // .toLocaleDateString() para simplificar la fecha
+
+            }
+
+            zonaDestino.innerHTML = listado;
+
+        }
+
+    </script>
+
+</head>
+<body>
+    <section id="zonaDestino">
+
+        Arrastre aquí.
+
+    </section>
+</body>
+</html>

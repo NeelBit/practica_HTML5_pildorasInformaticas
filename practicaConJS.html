@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+
+        <title>Practica con JS</title>
+
+        <!-- SCRIPT SUELE IR ANTES DEL CSS! -->
+
+        <script>
+            alert("Hola mundo");
+            console.log("Esta es la consola!");
+
+
+        </script>
+
+        <!-- PARA CARGAR JS EXTERNO: -->
+        <script src="primerArchivoJS.js"> </script>
+
+    </head>
+
+    <body>
+        
+        <!-- js inline -->
+        <p onclick="alert('Esta es otra alerta')" > Este es un párrafo sencillo</p>
+        <p> hola este es un parrafo, <span onclick="alert('alerta de span')" > pero haz click aquí.</span> </p>
+
+        <p ondblclick="mensajeDeDespedida()" id="p3" > Este texto es para probar otro evento</p>
+
+        <p> <span onmouseover="sePasoElRaton()"> Esto se activará cuando pasemos el ratón</span></p>
+
+    </body>
+
+</html>
